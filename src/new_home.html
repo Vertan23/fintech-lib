@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="new_nav_cv.css">
+        <link rel="stylesheet" href="new_books.css">
+        <link rel="stylesheet" href="new_form.css">
+        <script src="new_book_lib.js"></script>
+        <script src="new_form.js"></script>
+        <title>IBCM Library</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <!-- navigation bar -->
+        <navBar_cv id="nav_bar">
+            <ul class="navbar_cv-list">
+                <li class="navbar_cv-item">
+                    <a href="home.html"><img src = "images/ibcm_white_nb.png"
+                        onmouseout ="this.src = 'images/ibcm_white_nb.png'"
+                        onmouseover="this.src = 'images/ibcm_black_nb.png'" alt = "IBCM">
+                    </a>
+                </li>
+                <li class="navbar_cv-item">
+                    <button class="form_button" onclick="display_form()">Add book</button>
+                </li>
+                <li class="navbar_cv-item">
+                    <a href="https://www.ibcms.de/about">About</a>
+                    <!-- fast testing of adder() function -->
+                    <!-- <button class="form_button" onclick="adder('Accounting_101', 'https://drive.google.com/file/d/1AZRPVoifoLjTv_aQbfLUHowC7FsjLvaI/view', 'ibcmBooks/Accounting_101.png')">Add_1</button> -->
+                </li>
+                <li class="navbar_cv-item">
+                    <a href="https://www.ibcms.de/contact">Contact</a>
+                    <!-- fast testing of adder() function -->
+                    <!-- <button class="form_button" onclick="adder('Budgeting_101', 'https://drive.google.com/file/d/1WdYv8m83e5_RBBVdonYfjtJSX7QGL6sd/view', 'ibcmBooks/Budgeting_101.png')">Add_2</button> -->
+                </li>
+                
+                <!-- This is for the search bar -->
+                <!-- <li class="navbar_cv-item">
+                    <form class="searchContainer" action="**action**">
+                        <input type="text" placeholder="Book.." name="searchBar">
+                    </form>
+                </li> -->
+            </ul>
+        </navBar_cv>
+          
+        <!-- this is the form code. Usage: add books to the library -->
+        <!-- Name + url + tags + picture (looking forward to atuomate this) + file(.pdf) are requiered inputs -->
+        <!-- User = optional input - could also be implemented whenever there is an ulpading request sent -->
+    <!-- As of now  not functional -->
+        <div class="form_popup" id="upload_form">
+            <form action="/upload.php" class="form_container">
+                <div class="form_inputs">
+                    <input type="text" class="input_text" name="name" placeholder="book name" value="" required>
+                    <input type="url" class="input_text" name="drive_link" placeholder="google drive link" value="" required>
+                    <input type="text" class="input_text" name="tags" placeholder="tags" value="" required>
+                    <input style="width: 120px;" type="text" class="input_text" name="user" placeholder="(optional) your name" value="">
+                    <input type="file" class="input_text" name="photo" placeholder="book photo preview" value="" required>
+                </div>
+
+                <button class="form_buttons" type="button" onClick="testResults(this.form)">Submit</button>
+                <button class="form_buttons" type="button" onclick="hide_form()">Close</button>
+                <button class="form_buttons" type="reset" value="Reset">Reset</button>
+            </form>
+        </div>
+
+        <!-- this is for the 'to be' automated book lib -->
+        <div class="flex-container" id="auto_gen"></div>
+
+        <!-- this is the hard-coded version of the lib -->
+        <div class="flex-container" id="books">
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1AZRPVoifoLjTv_aQbfLUHowC7FsjLvaI/view"><img class="box-img" src="ibcmBooks/Accounting_101.png" alt="Accounting_101" title=""></a>
+            </div>
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1WdYv8m83e5_RBBVdonYfjtJSX7QGL6sd/view"><img class="box-img" src="ibcmBooks/Budgeting_101.png" alt="Budgeting_101" title=""></a>
+            </div>
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1B8CpWsMurie_uGcZQ54JxRVPL7GGIHvg/view"><img class="box-img" src="ibcmBooks/DayTrading_101.png" alt="DayTrading_101" title=""></a>
+            </div>
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1Ddk5jcQYN85cJlRDSLOhxbjjw2R7eLf3/view"><img class="box-img" src="ibcmBooks/Debt_101.png" alt="Debt_101" title=""></a>
+            </div>
+
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1Xq31OCvkRVH8zjFPvgdrirYOGqOiIVy1/view"><img class="box-img" src="ibcmBooks/Economics_101.png" alt="Economics_101" title=""></a>
+            </div>
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1JFubhW1eH2zDGbDCIBUBvkONzc-Twjun/view"><img class="box-img" src="ibcmBooks/Investing_101.png" alt="Investing_101" title=""></a>
+            </div>
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/10VqYt2wS5qSHtkn3KaWBu3MBK0DpdTW5/view"><img class="box-img" src="ibcmBooks/Management_101.png" alt="Management_101" title=""></a>
+            </div>
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1eLDWzlMobrHhtC_8OWIH5vjPeb5NptuF/view"><img class="box-img" src="ibcmBooks/Negotiating_101.png" alt="Negotiating_101" title=""></a>
+            </div>
+
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/16FIJ54WIj3WXpY3Op9f82d41_4QPwXQC/view"><img class="box-img" src="ibcmBooks/PersonalFinance_101.png" alt="PersonalFinance_101" title=""></a>
+            </div>
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1aKUUG8e61-95fVE_Yr7JztpOUxJ0fDm_/view"><img class="box-img" src="ibcmBooks/RealEstateInvesting_101.png" alt="RealEstateInvesting_101" title=""></a>
+            </div>
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1ERdfR9sJv3_UHjayuxOs1lO5e1e8lwNN/view"><img class="box-img" src="ibcmBooks/Sales_101.png" alt="Sales_101" title=""></a>
+            </div>
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1--wfxuNamUSclY0DYYW-1M9YliWn1nKn/view"><img class="box-img" src="ibcmBooks/Statistics_101.png" alt="Statistics_101" title=""></a>
+            </div>
+
+            <div class="flex-item">
+                <a href="https://drive.google.com/file/d/1_LUBeEtBlzMN1rlMCPjyJQldXYQVAkyw/view"><img class="box-img" src="ibcmBooks/StockMarket_101.png" alt="StockMarket_101" title=""></a>
+            </div>
+
+
+            <div class="flex-item"></div>
+            <div class="flex-item"></div>
+            <div class="flex-item"></div>
+            <div class="flex-item"></div>
+            <div class="flex-item"></div>
+          </div>
+    </body>
+</html>

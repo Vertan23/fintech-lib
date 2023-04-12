@@ -1,0 +1,75 @@
+.form_popup {
+    display: none;
+    position: fixed;
+}
+
+
+.form_container {
+    height: 37px;
+    width: 100vw;
+    margin: 0px;
+    background-color:rgb(111, 110, 110);
+    padding: 10px;
+    display: flex;
+}
+
+.form_container input[type=text], .form_container input[type=url] {
+    width: 100px;
+    padding: 10px;
+    border: none;
+    border-radius: 13px;
+    background: #f1f1f1;
+    margin-left: 5px;
+}
+
+.form_container input[type=file] {
+    width: 169px;
+    padding: 7px;
+    border-radius: 13px;
+    background-color: #f1f1f1;
+}
+
+.form_inputs {
+    float: left;
+    flex: 10%;
+}
+
+.form_buttons {
+    padding: 10px;
+    border: none;
+    border-radius: 13px;
+    margin-right: 10px;
+    cursor: grab;
+}
+
+.form_buttons:last-child {
+    margin-right: 20px;
+}
+
+
+.form_text:first-child,  .form_text:nth-child(2) {
+    float: left;
+}
+
+@media (max-width: 922px) {
+    .form_container {
+        height: 20%;
+    }
+}
+
+@media (max-width: 650px) {
+    .form_container {
+        flex: 100%;
+        background-color: transparent;
+        float: right;
+    }
+    .form_container input[type=file] {
+        margin-left: 5px;
+    }
+    .form_buttons {
+        flex: 100%;
+        max-width: 50px;
+        max-height: 50px;
+        display: block;
+    }
+}
