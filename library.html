@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>IBCM Library</title>
+</head>
+<body>
+
+>
+  <button id="add-file-btn">Add New Book</button>
+
+ 
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.1/firebase-storage.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+
+  <script>
+    
+    var firebaseConfig = 
+    {
+      apiKey: "AIzaSyDo1rVdWObbknK8_Sb3CoGA_I3Bu53Dprc",
+      authDomain: "http://fintech-lib.firebaseapp.com",
+      projectId: "fintech-lib",
+      storageBucket: "http://fintech-lib.appspot.com",
+      messagingSenderId: "369940692615",
+      appId: "1:369940692615:web:e9dd2eb655408789264222"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+    // Set up the Google API client with your client ID
+    var clientId = " 369940692615-5frbkt3fbujbdjv8ttjbf8b7l4rv4o9d.apps.googleusercontent.com ";
+    gapi.load('auth2', function() 
+    {
+      gapi.auth2.init
+        ({
+        client_id: clientId
+        });
+    });
+
+    
+    var addFileBtn = document.getElementById('add-file-btn');
+    addFileBtn.addEventListener('click', function() {
+      gapi.auth2.getAuthInstance().signIn()
+      .then(function() {
+        var picker = new firebase.storage().refFromURL('gs://<your-storage-bucket>').getMetadata().then(function(metadata) {
+          var accessToken = gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+          var picker = new google.picker.PickerBuilder()
+          .addView(google.picker.ViewId.DOCS)
+          .setOAuthToken(accessToken)
+          .setDeveloperKey('AIzaSyB56trbyOkmi-LU-kCbk-1ZDiXgaQ2RiXY')
+          .setCallback(pickerCallback)
+          .build();
+          picker.setVisible(true);
+        });
+      });
+    });
+
+    function pickerCallback(data) {
+      if (data.action == google.picker.Action.PICKED) {
+        var fileId = data.docs[0].id;
+        var fileName = data.docs[0].name;
+
+        var file = data.docs[0].nativeURL;
+        var storageRef = firebase.storage().ref('uploads/' + fileName);
+        var task = storageRef.put(file);
+
+        task.on('state_changed', 
+          function progress(snapshot) {
+            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log('Upload is ' + percentage + '% done');
+          }, 
+          function error(err) {
+            console.log('Upload error: ' + err);
+          }, 
+          function complete() {
+            console.log('Upload complete');
+          }
+        );
+      }
+    }
+  </script>
+
+</body>
+</html>
